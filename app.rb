@@ -41,10 +41,10 @@ class WordGuesserApp < Sinatra::Base
   post '/guess' do
     params[:guess].to_s[0]
 
-    if letter.nil? || letter.empty? || letter !~ /[a-zA-Z]/
-      flash[:message] = "Invalid guess."  # Non-letter input
+    if letter.nil? || letter.empty? || !(letter =~ /[a-zA-Z]/)
+      flash[:message] = "Invalid guess."
     elsif @game.guesses.include?(letter.downcase) || @game.wrong_guesses.include?(letter.downcase)
-      flash[:message] = "You have already used that letter."  # Repeated guess
+      flash[:message] = "You have already used that letter."
     else
       @game.guess(letter)
     end
@@ -69,12 +69,18 @@ class WordGuesserApp < Sinatra::Base
   end
 
   get '/win' do
-    ### YOUR CODE HERE ###
-    erb :win # You may change/remove this line
+    if @game.check_win_or_lose == :win
+      erb :win
+    else
+      redirect '/show'
+    end
   end
 
   get '/lose' do
-    ### YOUR CODE HERE ###
-    erb :lose # You may change/remove this line
+    if @game.check_win_or_lose == :lose
+      erb :lose
+    else
+      redirect '/show'
+    end
   end
 end
