@@ -62,16 +62,16 @@ Visit this URL and verify that the Start New Game page appears.
 
 Verify that when you click the New Game button, you get an error.  This is because we've deliberately left the `<form>` that encloses this button incomplete: we haven't specified where the form should post to. We'll do that next, but we'll do it in a test-driven way.
 
-But first, let's get our app onto Heroku.  This is actually a critical step.  We need to ensure that our app will run on heroku **before** we start making significant changes.
+But first, let's get our app onto Render.  This is actually a critical step.  We need to ensure that our app will run on render **before** we start making significant changes.
 
 * First, run `bundle install` to make sure our Gemfile and Gemfile.lock are in sync.
 * Next, type `git add .` to stage all changed files (including Gemfile.lock)
-* Then type `git commit -m "Ready for Heroku!"` to commit all local changes.
-* Next, type `heroku login` and authenticate.
-* Since this is the first time we're telling Heroku about the Wordguesser app, we must type `heroku create` to have Heroku prepare to recieve this code and to have it create a git reference for referencing the new remote repository.
-* Then, type `git push heroku master` to push your code to Heroku.
-* When you want to update Heroku later, you only need to commit your changes to git locally, then push to Heroku as in the last step.
-* Verify that the Heroku-deployed Wordguesser behaves the same as your development version before continuing. A few lines up from the bottom of the Heroku output in the terminal should have a URL ending in herokuapp.com. Find that, copy it to the clipboard, and paste it into a browser tab to see the current app.
+* Then type `git commit -m "Ready for Render!"` to commit all local changes.
+* Next, type `render login` and authenticate.
+* Since this is the first time we're telling Render about the Wordguesser app, we must type `render create` to have Render prepare to recieve this code and to have it create a git reference for referencing the new remote repository.
+* Then, type `git push gh main` to push your code to Render.
+* When you want to update Render later, you only need to commit your changes to git locally, then push to Render as in the last step.
+* Verify that the Render-deployed Wordguesser behaves the same as your development version before continuing. A few lines up from the bottom of the Render output in the terminal should have a URL ending in renderapp.com. Find that, copy it to the clipboard, and paste it into a browser tab to see the current app.
 * Verify the broken functionality by clicking the new game button.
 
 -----

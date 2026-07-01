@@ -14,7 +14,7 @@ Verify that a file exists in the courseware VM called `/usr/share/dict/words`.  
 <summary>Why do you think we used a remote SOA endpoint to generate random words for Wordguesser rather than <code>/usr/share/dict/words</code>?  (Hint: It's not simply to give you an initial taste of using SOA.)</summary>
 <p><blockquote>In many hosted deployment environments, you cannot rely on the
 presence of the local filesystem, and in shared environments such as
-Heroku you may not have access to the filesystem at all.  All state
+Render you may not have access to the filesystem at all.  All state
 must be stored in managed storage such as a database or other per-app
 abstraction, or managed on remote servers.
 </blockquote></p>

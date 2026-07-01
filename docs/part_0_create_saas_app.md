@@ -3,7 +3,7 @@ Part 0: Demystifying SaaS app creation
 
 **Goal:** Understand the steps needed to create, version, and deploy a SaaS app, including tracking the libraries it depends on so that your production and development environments are as similar as possible.
 
-**What you will do:** Create a simple "hello world" app using the Sinatra framework, version it properly, and deploy it to Heroku.
+**What you will do:** Create a simple "hello world" app using the Sinatra framework, version it properly, and deploy it to Render.
 
 Creating and versioning a simple SaaS app
 -----------------------------------------
@@ -162,33 +162,33 @@ In this case we are prefixing with `bundle exec` again in order to ensure we are
 
 Modify `app.rb` to print a different message, and verify that the change is detected by refreshing your browser tab with the running app.  Also before we move on you should commit your latest changes to git.
 
-Deploy to Heroku
+Deploy to Render
 ----------------
-Heroku is a cloud platform-as-a-service (PaaS) where we can deploy our Sinatra (and later Rails) applications. If you don't have an account yet, go sign up at http://www.heroku.com. You'll need your login and password for the next step.
+Render is a cloud platform-as-a-service (PaaS) where we can deploy our Sinatra (and later Rails) applications. If you don't have an account yet, go sign up at http://www.render.com. You'll need your login and password for the next step.
 
-Install Heroku CLI following [instructions](https://devcenter.heroku.com/articles/heroku-cli).
+Install Render CLI following [instructions](https://devcenter.render.com/articles/render-cli).
 
-Log in to your Heroku account by typing the command: `heroku login -i` in the terminal. This will connect you to your Heroku account.
+Log in to your Render account by typing the command: `render login` in the terminal. This will connect you to your Render account.
 
-While in the root directory of your project (not your whole workspace), type `heroku create` to create a new project in Heroku. This will tell the Heroku service to prepare for some incoming code, and locally it will add a remote git repository for you called `heroku`.
+While in the root directory of your project (not your whole workspace), type `render create` to create a new project in Render. This will tell the Render service to prepare for some incoming code, and locally it will add a remote git repository for you called `render`.
 
 Next, make sure you stage and commit all changes locally as instructed above (i.e. `git add`, `git commit`, etc).
 
-Earlier we saw that to run the app locally you run `rackup` to start the Rack appserver, and Rack looks in `config.ru` to determine how to start your Sinatra app.  How do you tell a production environment how to start an appserver or other processes necessary to receive requests and start your app?  In the case of Heroku, this is done with a special file named `Procfile`,  which specifies one or more types of Heroku processes your app will use, and how to start each one. The most basic Heroku process type is called a Dyno, or "web worker".  One Dyno can serve one user request at a time.  Since we're on Heroku's free tier, we can only have one Dyno. Let's create a file named `Procfile`, and only this as the name (i.e. Procfile.txt is not valid). Write the following line in your `Procfile`:
+Earlier we saw that to run the app locally you run `rackup` to start the Rack appserver, and Rack looks in `config.ru` to determine how to start your Sinatra app.  How do you tell a production environment how to start an appserver or other processes necessary to receive requests and start your app?  In the case of Render, this is done with a special file named `Procfile`,  which specifies one or more types of Render processes your app will use, and how to start each one. The most basic Render process type is called a Dyno, or "web worker".  One Dyno can serve one user request at a time.  Since we're on Render's free tier, we can only have one Dyno. Let's create a file named `Procfile`, and only this as the name (i.e. Procfile.txt is not valid). Write the following line in your `Procfile`:
 
 ```
 web: bundle exec rackup config.ru -p $PORT
 ```
 
-This tells Heroku to start a single web worker (Dyno) using essentially the same command line you used to start Rack locally. Note that in some cases, a `Procfile` is not necessary since Heroku can infer from your files how to start the app. However, it's always better to be explicit.
+This tells Render to start a single web worker (Dyno) using essentially the same command line you used to start Rack locally. Note that in some cases, a `Procfile` is not necessary since Render can infer from your files how to start the app. However, it's always better to be explicit.
 
-Your local repo is now ready to deploy to Heroku:
+Your local repo is now ready to deploy to Render:
 
 ```
-$ git push heroku master
+$ git push gh main
 ```
 
-(`master` refers to which branch of the remote Heroku repo we are pushing to.  We'll learn about branches later in the course, but for now, suffice it to say that you can only deploy to the `master` branch on Heroku.) This push will create a running instance of your app at some URL ending with `herokuapp.com`. Enter that URL in a new browser tab to see your app running live. Congratulations, you did it--your app is live!
+(`master` refers to which branch of the remote Render repo we are pushing to.  We'll learn about branches later in the course, but for now, suffice it to say that you can only deploy to the `master` branch on Render.) This push will create a running instance of your app at some URL ending with `renderapp.com`. Enter that URL in a new browser tab to see your app running live. Congratulations, you did it--your app is live!
 
 Summary
 -------
@@ -201,7 +201,7 @@ Summary
 
 * You versioned the important files containing not only your app's code but the necessary info to reproduce all the libraries it relies on and the file that starts up the app.
 
-* You deployed this simple app to Heroku.
+* You deployed this simple app to Render.
 
 -----
 
