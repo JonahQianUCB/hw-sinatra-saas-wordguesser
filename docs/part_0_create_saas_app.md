@@ -166,7 +166,7 @@ Deploy to Render
 ----------------
 Render is a cloud platform-as-a-service (PaaS) where we can deploy our Sinatra (and later Rails) applications. If you don't have an account yet, go sign up at http://www.render.com. You'll need your login and password for the next step.
 
-Install Render CLI following [instructions](https://devcenter.render.com/articles/render-cli).
+Install Render CLI following [instructions](https://render.com/docs/cli).
 
 Log in to your Render account by typing the command: `render login` in the terminal. This will connect you to your Render account.
 
