@@ -164,31 +164,25 @@ Modify `app.rb` to print a different message, and verify that the change is dete
 
 Deploy to Render
 ----------------
-Render is a cloud platform-as-a-service (PaaS) where we can deploy our Sinatra (and later Rails) applications. If you don't have an account yet, go sign up at http://www.render.com. You'll need your login and password for the next step.
+Render is a cloud platform-as-a-service (PaaS) where we can deploy our Sinatra (and later Rails) applications. If you don't have an account yet, go sign up at http://www.render.com.
 
-Install Render CLI following [instructions](https://render.com/docs/cli).
-
-Log in to your Render account by typing the command: `render login` in the terminal. This will connect you to your Render account.
-
-While in the root directory of your project (not your whole workspace), type `render create` to create a new project in Render. This will tell the Render service to prepare for some incoming code, and locally it will add a remote git repository for you called `render`.
-
-Next, make sure you stage and commit all changes locally as instructed above (i.e. `git add`, `git commit`, etc).
-
-Earlier we saw that to run the app locally you run `rackup` to start the Rack appserver, and Rack looks in `config.ru` to determine how to start your Sinatra app.  How do you tell a production environment how to start an appserver or other processes necessary to receive requests and start your app?  In the case of Render, this is done with a special file named `Procfile`,  which specifies one or more types of Render processes your app will use, and how to start each one. The most basic Render process type is called a Dyno, or "web worker".  One Dyno can serve one user request at a time.  Since we're on Render's free tier, we can only have one Dyno. Let's create a file named `Procfile`, and only this as the name (i.e. Procfile.txt is not valid). Write the following line in your `Procfile`:
+Earlier we saw that to run the app locally you run `rackup` to start the Rack appserver, and Rack looks in `config.ru` to determine how to start your Sinatra app.  How do you tell a production environment how to start an appserver or other processes necessary to receive requests and start your app?  In the case of Render, this is done with a special file named `Procfile`, which specifies one or more types of processes your app will use, and how to start each one. Create a file named `Procfile` (exactly that name, no `.txt` extension). Write the following line in your `Procfile`:
 
 ```
-web: bundle exec rackup config.ru -p $PORT
+web: bundle exec rackup config.ru -p $PORT -o 0.0.0.0
 ```
 
-This tells Render to start a single web worker (Dyno) using essentially the same command line you used to start Rack locally. Note that in some cases, a `Procfile` is not necessary since Render can infer from your files how to start the app. However, it's always better to be explicit.
+This tells Render to start a single web worker using essentially the same command line you used to start Rack locally. Note that `-o 0.0.0.0` is required so that the server listens on all network interfaces in the hosted environment.
 
-Your local repo is now ready to deploy to Render:
+Make sure you stage and commit all files including the Procfile:
 
 ```
-$ git push gh main
+git add Procfile
+git commit -m "Add Procfile for Render"
+git push gh main
 ```
 
-(`master` refers to which branch of the remote Render repo we are pushing to.  We'll learn about branches later in the course, but for now, suffice it to say that you can only deploy to the `master` branch on Render.) This push will create a running instance of your app at some URL ending with `renderapp.com`. Enter that URL in a new browser tab to see your app running live. Congratulations, you did it--your app is live!
+Now go to your [Render dashboard](https://dashboard.render.com), click **New Web Service**, and connect your GitHub repository. Set the **Build Command** to `bundle install` and the **Start Command** to `bundle exec rackup config.ru -p $PORT -o 0.0.0.0`. Click **Deploy**. Render will give you a URL ending in `.onrender.com`. Enter that URL in a new browser tab to see your app running live. Congratulations, you did it--your app is live!
 
 Summary
 -------

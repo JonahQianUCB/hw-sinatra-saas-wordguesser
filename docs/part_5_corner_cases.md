@@ -24,7 +24,7 @@ When all scenarios are passing, deploy to Render and submit the URL of your depl
 You can create your text file using the `echo` command like this:
 
 ```
-echo 'my-app-12345.renderapp.com' > sinatra-url.txt
+echo 'my-app-12345.onrender.com' > sinatra-url.txt
 ```
 
 If you run the `cat` command after creating the file like this:
@@ -36,7 +36,7 @@ cat sinatra-url.txt
 then the output should look like this:
 
 ```
-my-app-12345.renderapp.com
+my-app-12345.onrender.com
 ```
 
 You would of course change 'my-app-12345' to match your Render URL.

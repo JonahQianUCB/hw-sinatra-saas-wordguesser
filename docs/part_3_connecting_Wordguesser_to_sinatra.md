@@ -1,4 +1,3 @@
-
 Part 3: Connecting Wordguesser to Sinatra
 ============================================
 
@@ -62,17 +61,19 @@ Visit this URL and verify that the Start New Game page appears.
 
 Verify that when you click the New Game button, you get an error.  This is because we've deliberately left the `<form>` that encloses this button incomplete: we haven't specified where the form should post to. We'll do that next, but we'll do it in a test-driven way.
 
-But first, let's get our app onto Render.  This is actually a critical step.  We need to ensure that our app will run on render **before** we start making significant changes.
+But first, let's get our app onto Render.  This is actually a critical step.  We need to ensure that our app will run on Render **before** we start making significant changes.
 
 * First, run `bundle install` to make sure our Gemfile and Gemfile.lock are in sync.
 * Next, type `git add .` to stage all changed files (including Gemfile.lock)
 * Then type `git commit -m "Ready for Render!"` to commit all local changes.
-* Next, type `render login` and authenticate.
-* Since this is the first time we're telling Render about the Wordguesser app, we must type `render create` to have Render prepare to recieve this code and to have it create a git reference for referencing the new remote repository.
-* Then, type `git push gh main` to push your code to Render.
-* When you want to update Render later, you only need to commit your changes to git locally, then push to Render as in the last step.
-* Verify that the Render-deployed Wordguesser behaves the same as your development version before continuing. A few lines up from the bottom of the Render output in the terminal should have a URL ending in renderapp.com. Find that, copy it to the clipboard, and paste it into a browser tab to see the current app.
+* Push your code to GitHub: `git push gh main`
+* Go to [render.com](https://render.com) dashboard → click **New Web Service** → connect your GitHub repo.
+* Set the **Build Command** to `bundle install` and the **Start Command** to `bundle exec rackup config.ru -p $PORT -o 0.0.0.0`.
+* Click **Deploy**. Render will give you a URL ending in `.onrender.com`. Copy it to your clipboard and paste it into a browser tab to see the current app.
+* Verify that the Render-deployed Wordguesser behaves the same as your development version before continuing.
 * Verify the broken functionality by clicking the new game button.
+
+For all future deployments to Render, simply commit your changes locally and run `git push gh main` — Render will auto-deploy via the GitHub integration.
 
 -----
 
