@@ -27,7 +27,7 @@ end
 # The following lines disable web usage and causes the external API to be stubbed out,
 # eliminating randomness to aid in testing
 def stub_random_word(word)
-  stub_request(:post, 'http://randomword.saasbook.info/RandomWord').to_return(body: word)
+  stub_request(:get, 'https://randomword.saasbook.info/RandomWord').to_return(body: "<div>#{word}</div>")
 end
 
 WebMock.disable_net_connect!(allow_localhost: true)
@@ -35,7 +35,7 @@ WebMock.disable_net_connect!(allow_localhost: true)
 RSpec.configure do |config|
   config.include Rack::Test::Methods
   config.before do
-    stub_request(:post, "http://randomword.saasbook.info/RandomWord").to_return(body: "foobar")
+    stub_request(:get, "https://randomword.saasbook.info/RandomWord").to_return(body: "<div>foobar</div>")
   end
   config.color = true
   config.filter_run_excluding pending: true # this avoids excessive pending examples output
